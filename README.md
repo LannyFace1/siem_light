@@ -36,8 +36,10 @@ Das Projekt soll reale Security-Grundlagen praktisch demonstrieren.
 ### 1. Clone and configuration
 
 ```bash
-git clone 
+git clone
+
 cd siem_ligght/
+
 cp .env.example .env
 ```
 
@@ -110,4 +112,5 @@ siem_light/
 |   └──
 
 ```
+
 
