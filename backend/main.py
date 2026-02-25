@@ -28,6 +28,7 @@ def scan():
         if not event_exists(e['timestamp'], e['ip_address']):
             insert_event(e['timestamp'], e['ip_address'], e['username'])
             new_events += 1
+    run_detection()  # <- diese Zeile hinzufügen
     return jsonify({"status": "scan complete", "events_found": new_events})
 
 ## get all alerts
@@ -48,6 +49,7 @@ def logs():
 if __name__ == "__main__":
     init_db()
     app.run(debug=False, host='0.0.0.0', port=5000)
+
 
 
 
