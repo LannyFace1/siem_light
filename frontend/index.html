@@ -60,6 +60,7 @@
             const response = await fetch('/alerts');
             const data = await response.json();
             const tbody = document.getElementById('alerts-body');
+            tbody.innerHTML = '';
     
             data.alerts.forEach(alert => {
                 const row = document.createElement('tr');
@@ -77,6 +78,7 @@
             const response = await fetch('/logs');
             const data = await response.json();
             const tbody = document.getElementById('events-body');
+            tbody.innerHTML = '';
     
             data.logs.forEach(logs => {
                 const row = document.createElement('tr');
@@ -104,4 +106,5 @@
 </body>
 
 </html>
+
 
