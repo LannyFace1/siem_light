@@ -8,9 +8,11 @@ services:
     volumes:
       - ${HOST_LOG_PATH}:/app/auth.log:ro
       - siem_db:/app/data
+      - ./frontend:/app/frontend
 
 volumes:
 
   siem_db:
+
 
 
