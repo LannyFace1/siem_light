@@ -1,8 +1,0 @@
-Nov 14 06:32:11 server sshd[12345]: Failed password for root from 192.168.1.100 port 22 ssh2
-Nov 14 06:32:15 server sshd[12345]: Failed password for admin from 192.168.1.100 port 22 ssh2
-Nov 14 06:32:20 server sshd[12345]: Accepted password for user1 from 10.0.0.5 port 22 ssh2
-Nov 14 06:32:25 server sshd[12345]: Failed password for root from 10.0.0.9 port 22 ssh2
-Nov 14 06:32:30 server sshd[12345]: Failed password for root from 192.168.1.100 port 22 ssh2
-Nov 14 06:32:35 server sshd[12345]: Failed password for root from 192.168.1.100 port 22 ssh2
-Nov 14 06:32:40 server sshd[12345]: Failed password for root from 192.168.1.100 port 22 ssh2
-2026-02-25T08:19:01.949451-05:00 debian sshd-session[295545]: Failed password for invalid user testen from 192.168.68.53 port 64609 ssh2
