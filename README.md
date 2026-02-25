@@ -33,15 +33,25 @@ Das Projekt soll reale Security-Grundlagen praktisch demonstrieren.
 
 ## 🚀 Quick Start
 
-### 1. Clone and configuration
+1. Clone and configuration
 
 ```bash
 
-git clone 
+git clone https://github.com/LannyFace1/siem_light.git
 cd siem_light/
 cp .env.example .env
 
 ```
+
+2. Edit `.env`:
+   ```env
+   SECRET_KEY=your_secret_key
+   ```
+3. Start
+  ```bash
+  docker compose up -d
+  ```
+Open ***http://localhost:5000***
 
 ## 🧱 Technologie-Stack
 
@@ -117,5 +127,6 @@ siem_light/
 |   └──index.html
 
 ```
+
 
 
