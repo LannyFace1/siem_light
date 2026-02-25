@@ -63,8 +63,8 @@ def get_all_alerts():
         return cursor.fetchall()
 
 ## Checks whether an alert already exists for an IP address.
-def alert_exists(ip_address):
+def event_exists(timestamp, ip_address):
     with sqlite3.connect(DB_PATH) as conn:
         cursor = conn.cursor()
-        cursor.execute('SELECT id FROM alerts WHERE ip_address = ?', (ip_address,))
+        cursor.execute('SELECT id FROM events WHERE timestamp = ? AND ip_address = ?', (timestamp, ip_address))
         return cursor.fetchone() is not None
