@@ -1,6 +1,6 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 import os
-from db import get_all_events, insert_alert, alert_exists
+from db import get_all_events, upsert_alert
 
 ALERT_THRESHOLD = int(os.environ.get('FAILED_ATTEMPTS', 5))
 TIME_WINDOW = int(os.environ.get('TIME_WINDOW', 300))
@@ -21,8 +21,9 @@ def run_detection():
 
     for ip, timestamps in ip_attempts.items():
         timestamps.sort()
+        max_window = 0
         for i in range(len(timestamps)):
             window = [t for t in timestamps if (timestamps[i] - t).total_seconds() <= TIME_WINDOW and t <= timestamps[i]]
-            if len(window) >= ALERT_THRESHOLD and not alert_exists(ip):
-                insert_alert(ip, len(window))
-                break
+            max_window = max(max_window, len(window))
+        if max_window >= ALERT_THRESHOLD:
+            upsert_alert(ip, max_window)
