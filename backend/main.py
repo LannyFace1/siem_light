@@ -34,7 +34,7 @@ def scan():
 ## get all alerts
 @app.route('/alerts')
 def alerts():
-    results = [{"id": a[0], "ip_address": a[1], "attempt_count": a[2], "created_at": a[3]} for a in get_all_alerts()]
+    results = [{"id": a[0], "ip_address": a[1], "attempt_count": a[2], "alert_type": a[3], "created_at": a[4]} for a in get_all_alerts()]
     return jsonify({"alerts": results})
 
 ## get all logs
@@ -49,6 +49,7 @@ def logs():
 if __name__ == "__main__":
     init_db()
     app.run(debug=False, host='0.0.0.0', port=5000)
+
 
 
 
