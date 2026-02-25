@@ -2,7 +2,7 @@
 from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 import os
-from db import init_db, get_all_events, get_all_alerts, insert_event
+from db import init_db, get_all_events, get_all_alerts, insert_event, event_exists
 from detection import run_detection
 from parser import get_failed_attempts
 
@@ -23,9 +23,12 @@ def index():
 @app.route('/scan')
 def scan():
     events = get_failed_attempts()
+    new_events = 0
     for e in events:
-        insert_event(e['timestamp'], e['ip_address'], e['username'])
-    return jsonify({"status": "scan complete", "events_found": len(events)})
+        if not event_exists(e['timestamp'], e['ip_address']):
+            insert_event(e['timestamp'], e['ip_address'], e['username'])
+            new_events += 1
+    return jsonify({"status": "scan complete", "events_found": new_events})
 
 ## get all alerts
 @app.route('/alerts')
@@ -45,6 +48,7 @@ def logs():
 if __name__ == "__main__":
     init_db()
     app.run(debug=False, host='0.0.0.0', port=5000)
+
 
 
 
