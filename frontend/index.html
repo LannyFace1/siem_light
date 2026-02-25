@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIEM Light</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#0a0a0a] text-gray-300 font-mono min-h-screen">
+
+    <header class="border-b border-red-900 p-6 flex items-center justify-between">
+    <h1 class="text-red-500 text-2xl font-bold tracking-widest">⚠ SIEM-LIGHT</h1>
+    <div class="flex items-center gap-4">
+        <button onclick="runScan()" class="text-sm border border-green-400 text-green-400 px-4 py-1 rounded hover:bg-green-400 hover:text-black transition">
+            ⟳ SCAN
+        </button>
+        <span class="text-green-400 text-sm">● SYSTEM ONLINE</span>
+    </div>
+</header>
+
+    <main class="p-6 space-y-8">
+
+        <section id="alerts" class="bg-[#111111] border border-red-900 rounded p-4">
+            <h2 class="text-red-500 text-lg font-bold mb-4 tracking-wider">// ALERTS</h2>
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="text-gray-500 border-b border-gray-800">
+                        <th class="text-left py-2 pr-4">ID</th>
+                        <th class="text-left py-2 pr-4">IP ADDRESS</th>
+                        <th class="text-left py-2 pr-4">ATTEMPTS</th>
+                        <th class="text-left py-2">CREATED AT</th>
+                    </tr>
+                </thead>
+                <tbody id="alerts-body">
+                </tbody>
+            </table>
+        </section>
+
+        <section id="events" class="bg-[#111111] border border-gray-800 rounded p-4">
+            <h2 class="text-green-400 text-lg font-bold mb-4 tracking-wider">// EVENTS</h2>
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="text-gray-500 border-b border-gray-800">
+                        <th class="text-left py-2 pr-4">ID</th>
+                        <th class="text-left py-2 pr-4">TIMESTAMP</th>
+                        <th class="text-left py-2 pr-4">IP ADDRESS</th>
+                        <th class="text-left py-2">USERNAME</th>
+                    </tr>
+                </thead>
+                <tbody id="events-body">
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <script>
+        async function loadAlerts() {
+            const response = await fetch('http://localhost:5000/alerts');
+            const data = await response.json();
+            const tbody = document.getElementById('alerts-body');
+    
+            data.alerts.forEach(alert => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="py-2 pr-4 text-red-500">${alert.id}</td>
+                    <td class="py-2 pr-4 text-red-400">${alert.ip_address}</td>
+                    <td class="py-2 pr-4">${alert.attempt_count}</td>
+                    <td class="py-2 text-gray-500">${alert.created_at}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }   
+
+        async function loadLogs() {
+            const response = await fetch('http://localhost:5000/logs');
+            const data = await response.json();
+            const tbody = document.getElementById('events-body');
+    
+            data.logs.forEach(logs => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="py-2 pr-4 text-green-400">${logs.id}</td>
+                    <td class="py-2 pr-4 text-green-300">${logs.timestamp}</td>
+                    <td class="py-2 pr-4 text-green-400">${logs.ip_address}</td>
+                    <td class="py-2 text-gray-500">${logs.username}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        async function runScan() {
+            const response = await fetch('http://localhost:5000/scan');
+            const data = await response.json();
+            alert(`Scan complete – ${data.events_found} events found`);
+            loadAlerts();
+            loadLogs();
+        }
+
+        
+    </script>
+</body>
+</html>
