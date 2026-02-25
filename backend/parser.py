@@ -3,7 +3,7 @@ import re
 import os
 
 ## Data path for the log file
-LOG_FILE_PATH = os.environ.get('LOG_FILE_PATH', 'backend/auth.log')
+LOG_FILE_PATH = os.environ.get('CONTAINER_LOG_PATH', 'backend/test.log')
 ## read log file line by line and return a list of log entries
 def read_log_file():
     with open(LOG_FILE_PATH, 'r') as file:
@@ -27,3 +27,4 @@ def get_failed_attempts():
     log_entries = read_log_file()
     failed_attempts = extract_failed_attempts(log_entries)
     return failed_attempts
+
