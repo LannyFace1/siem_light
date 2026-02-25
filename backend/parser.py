@@ -15,7 +15,7 @@ def extract_failed_attempts(log_entries):
     failed_logins = []
     for entry in log_entries:
         if 'Failed' in entry:
-            timestamp = datetime.strptime(timestamp_str, '%Y-%m-%dT%H:%M:%S'), entry)
+            timestamp = datetime.strptime(timestamp_str, '%Y-%m-%dT%H:%M:%S')
             ip_address = re.search(r'from (\d+\.\d+\.\d+\.\d+)', entry)
             username = re.search(r'for (\w+)', entry)
             if timestamp and ip_address and username:
@@ -27,5 +27,6 @@ def get_failed_attempts():
     log_entries = read_log_file()
     failed_attempts = extract_failed_attempts(log_entries)
     return failed_attempts
+
 
 
