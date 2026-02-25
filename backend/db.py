@@ -69,8 +69,21 @@ def event_exists(timestamp, ip_address):
         cursor.execute('SELECT id FROM events WHERE timestamp = ? AND ip_address = ?', (timestamp, ip_address))
         return cursor.fetchone() is not None
 
-def alert_exists(ip_address):
+def upsert_alert(ip_address, attempt_count):
+    created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with sqlite3.connect(DB_PATH) as conn:
         cursor = conn.cursor()
         cursor.execute('SELECT id FROM alerts WHERE ip_address = ?', (ip_address,))
-        return cursor.fetchone() is not None
+        existing = cursor.fetchone()
+        if existing:
+            cursor.execute('''
+                UPDATE alerts SET attempt_count = ?, created_at = ?
+                WHERE ip_address = ?
+            ''', (attempt_count, created_at, ip_address))
+        else:
+            cursor.execute('''
+                INSERT INTO alerts (ip_address, attempt_count, created_at)
+                VALUES (?, ?, ?)
+            ''', (ip_address, attempt_count, created_at))
+        conn.commit()
+
