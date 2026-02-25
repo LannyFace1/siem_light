@@ -6,9 +6,10 @@ services:
     env_file:
       - .env
     volumes:
-      - ${LOG_FILE_PATH}:/app/auth.log:ro
+      - ${HOST_LOG_PATH}:/app/auth.log:ro
       - siem_db:/app/data
 
 volumes:
 
   siem_db:
+
