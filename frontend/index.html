@@ -29,6 +29,7 @@
                         <th class="text-left py-2 pr-4">ID</th>
                         <th class="text-left py-2 pr-4">IP ADDRESS</th>
                         <th class="text-left py-2 pr-4">ATTEMPTS</th>
+                        <th class="text-left py-2 pr-4">TYPE</th>  
                         <th class="text-left py-2">CREATED AT</th>
                     </tr>
                 </thead>
@@ -68,6 +69,7 @@
                     <td class="py-2 pr-4 text-red-500">${alert.id}</td>
                     <td class="py-2 pr-4 text-red-400">${alert.ip_address}</td>
                     <td class="py-2 pr-4">${alert.attempt_count}</td>
+                    <td class="py-2 pr-4 ${alert.alert_type === 'BRUTE_FORCE' ? 'text-red-500' : 'text-yellow-500'}">${alert.alert_type}</td>   
                     <td class="py-2 text-gray-500">${alert.created_at}</td>
                 `;
                 tbody.appendChild(row);
@@ -106,5 +108,6 @@
 </body>
 
 </html>
+
 
 
