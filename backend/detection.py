@@ -14,7 +14,7 @@ def run_detection():
     
     for event in events:
         timestamp_str, ip_address, username = event[1], event[2], event[3]
-        timestamp = datetime.strptime(timestamp_str, '%b %d %H:%M:%S')
+        timestamp = datetime.strptime(timestamp_str, '%Y-%m-%dT%H:%M:%S')
         
         if ip_address not in ip_attempts:
             ip_attempts[ip_address] = []
@@ -33,4 +33,5 @@ def run_detection():
             if attempt_count >= ALERT_THRESHOLD and not alert_exists(ip):
                 insert_alert(ip, attempt_count)
                 break
+
 
