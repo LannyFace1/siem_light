@@ -44,13 +44,13 @@ cp .env.example .env
 ```
 
 2. Edit `.env`:
-   ```env
-   SECRET_KEY=your_secret_key
-   ```
+```env
+SECRET_KEY=your_secret_key
+```
 3. Start
-  ```bash
-  docker compose up -d
-  ```
+```bash
+docker compose up -d
+```
 Open ***http://localhost:5000***
 
 ## 🧱 Technologie-Stack
@@ -127,6 +127,7 @@ siem_light/
 |   └──index.html
 
 ```
+
 
 
 
