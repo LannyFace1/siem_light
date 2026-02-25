@@ -12,7 +12,7 @@ CORS(app)
 
 @app.route('/')
 def dashboard():
-    return send_from_directory('/siem_light/frontend', 'index.html')
+    return send_from_directory('/app/frontend', 'index.html')
 
 ## app status
 @app.route('/status')
@@ -45,6 +45,7 @@ def logs():
 if __name__ == "__main__":
     init_db()
     app.run(debug=False, host='0.0.0.0', port=5000)
+
 
 
 
