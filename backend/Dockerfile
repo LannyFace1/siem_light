@@ -11,8 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Anwendungscode kopieren
 COPY . .
 
-# non root user erstellen und Berechtigungen setzen
-RUN useradd -m appuser 
+# non root user erstellen, Datenordner anlegen und Berechtigungen setzen
+RUN useradd -m appuser && mkdir -p /app/data && chown -R appuser:appuser /app/data
 USER appuser
 
 # Port freigeben
