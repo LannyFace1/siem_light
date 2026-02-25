@@ -57,7 +57,7 @@
 
     <script>
         async function loadAlerts() {
-            const response = await fetch('http://localhost:5000/alerts');
+            const response = await fetch('/alerts');
             const data = await response.json();
             const tbody = document.getElementById('alerts-body');
     
@@ -74,7 +74,7 @@
         }   
 
         async function loadLogs() {
-            const response = await fetch('http://localhost:5000/logs');
+            const response = await fetch('/logs');
             const data = await response.json();
             const tbody = document.getElementById('events-body');
     
@@ -91,7 +91,7 @@
         }
 
         async function runScan() {
-            const response = await fetch('http://localhost:5000/scan');
+            const response = await fetch('/scan');
             const data = await response.json();
             alert(`Scan complete – ${data.events_found} events found`);
             loadAlerts();
@@ -104,3 +104,4 @@
 </body>
 
 </html>
+
