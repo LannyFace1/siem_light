@@ -35,10 +35,12 @@ Das Projekt soll reale Security-Grundlagen praktisch demonstrieren.
 
 ### 1. Clone and configuration
 
-'''bash
+''' bash
+
 git clone 
 cd siem_light/
 cp .env.example .env
+
 '''
 
 ## 🧱 Technologie-Stack
@@ -115,3 +117,4 @@ siem_light/
 |   └──index.html
 
 ```
+
