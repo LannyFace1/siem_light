@@ -1,5 +1,5 @@
 ## import necessary libraries
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 import os
 from db import init_db, get_all_events, get_all_alerts, insert_event
@@ -9,6 +9,10 @@ from parser import get_failed_attempts
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'fallback_key')
 CORS(app)
+
+@app.route('/dashboard')
+def dashboard():
+    return send_from_directory('/app/frontend', 'index.html')
 
 ## app status
 @app.route('/')
@@ -41,4 +45,5 @@ def logs():
 if __name__ == "__main__":
     init_db()
     app.run(debug=False, host='0.0.0.0', port=5000)
+
 
