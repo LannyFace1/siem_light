@@ -32,3 +32,5 @@ def run_detection():
             
             if attempt_count >= ALERT_THRESHOLD and not alert_exists(ip):
                 insert_alert(ip, attempt_count)
+                break
+
