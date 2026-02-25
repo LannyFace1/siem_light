@@ -122,11 +122,12 @@ siem_light/
 |   └──Dockerfile
 |   └──main.py
 |   └──parser.py
-|   └──requirement.txt
+|   └──requirements.txt
 ├──frontend/
 |   └──index.html
 
 ```
+
 
 
 
